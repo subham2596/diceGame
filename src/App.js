@@ -3,7 +3,6 @@ import './App.css';
 import HomePage from './components/HomePage';
 import RollDice from './components/RollDice';
 import { Provider } from 'react-redux';
-import RulesContext from './utils/RulesContext';
 import store from './utils/store';
 
 const appRouter = createBrowserRouter([
