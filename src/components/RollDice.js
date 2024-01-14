@@ -30,16 +30,17 @@ const Dice = () => {
       if (randomNum == selectedNumber){
         dispatch(addTotal(randomNum))
         setMatch(true);
-        setTimeout(()=>{setMatch(false)},3000)
+        setTimeout(()=>{setMatch(false)}, 3000)
       } else {
         dispatch(subtractTotal())
         setUnmatch(true);
-        setTimeout(()=>{setUnmatch(false)},2000)
+        setTimeout(()=>{setUnmatch(false)}, 3000)
       }
       dispatch(setChoiceToZero())
+      setTimeout(()=>{removeSelection()}, 1000)
     } else {
       setFlashError(true)
-      setTimeout(()=>{setFlashError(false)},3000)
+      setTimeout(()=>{setFlashError(false)}, 3000)
     }
     
   }
@@ -72,6 +73,9 @@ const BottomButtons = () => {
   const [displayRules, setDisplayRules] = useState(false)
   const rulesHandler = () => {
     setDisplayRules(!displayRules);
+    setTimeout(()=>{
+      document.querySelector(".rules")?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+  }, 50)
   }
 
   const dispatch = useDispatch();
@@ -88,15 +92,15 @@ const BottomButtons = () => {
   return (
     <div className='flex flex-col gap-3 relative'>
       <button className="w-40 px-4 py-1 rounded-sm bg-white border border-black text-center" onClick={resetScoreHandler}>Reset Score</button>
-      <button className="w-40 px-4 py-1 rounded-sm bg-black text-white text-center" onClick={rulesHandler}>Show Rules</button>
+      <button className="w-40 px-4 py-1 rounded-sm bg-black text-white text-center" onClick={rulesHandler}>{displayRules ? "Hide" : "Show"} Rules</button>
       {displayRules && 
-        <div className="w-[600px] diceRules absolute top-28 left-[-200px] bg-[#FBF1F1] p-5">
+        <div className="rules w-[600px] diceRules absolute top-28 left-[-200px] bg-[#FBF1F1] p-5">
           <h1 className='font-bold'>How to play dice game</h1>
           <ul>
-            <li>Select any number.</li>
+            <li>Select any number from top.</li>
             <li>Click on dice image.</li>
             <li>After clicking on dice if selected number is equal to dice number, you will get same point as dice.</li>
-            <li>If you get wrong guess then 2 points will be deducted.</li>
+            <li>If you get a wrong guess, 1 point will be deducted.</li>
           </ul>
         </div>}
     </div>

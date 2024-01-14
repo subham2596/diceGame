@@ -32,7 +32,7 @@ const SelectYourNumber = () => {
         <div className='flex flex-col gap-3 items-end'>
             <div className='flex gap-3 numbersContainer'>
                 {new Array(6).fill('').map((el, index) => {
-                    return <div className='px-4 py-2 border border-black cursor-pointer font-bold' onClick={selectnumber}>{index + 1}</div>
+                    return <div key={index} className='px-4 py-2 border border-black cursor-pointer font-bold' onClick={selectnumber}>{index + 1}</div>
                 })}
             </div>
             
